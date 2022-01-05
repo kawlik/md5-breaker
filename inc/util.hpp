@@ -30,7 +30,15 @@ void toUpperCase( string &str );
  */
 void toStartCase( string &str );
 
-
+/**
+/**
+ * @brief Generates next premutation in char array
+ * 
+ * @param array refrence to modified array
+ * @param index index of modified index
+ * @return bool
+ */
+bool nextPremutation( char *array, uint index );
 
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */
 

@@ -25,6 +25,21 @@ void producer( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set
 
 
 /**
+ * @brief General producer function of type 3 ( character increment )
+ * 
+ * @param mtx refrence to mutex
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ * @param callback pointer to callback function
+ */
+void producer_chararr( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ), bool reverseNotation );
+
+
+/*  utility aliases
+/*   *   *   *   *   *   *   *   *   *   */
+
+/**
  * @brief Producer function of type 0 1 2 with regular notation
  * 
  * @param mtx refrence to mutex

@@ -23,7 +23,10 @@ using namespace std;
 /*  macros
 /*   *   *   *   *   *   *   *   *   *   */
 
-#define MAX_NUM_CHECK 10000
+#define MAX_NUM_CHECK   10000
+#define CHARARR_LEN     4
+#define ASCI_MIN        0x21
+#define ASCI_MAX        0x7E
 
 
 /*  aliases
