@@ -41,3 +41,22 @@ bool readFromFile( const string filename, set_t &set ) {
     //  operaion was unsuccessful
     return false;
 }
+
+void initSolutionVect( solution_vect &vect, set_t &set_hash ) {
+
+    delete [] vect.hasResult;
+    delete [] vect.hash;
+    delete [] vect.word;
+
+    size_t size = set_hash.size;
+
+    vect.size = size;
+    vect.left = size;
+    vect.hash = set_hash.array;
+    vect.word = new string [ size ];
+    vect.hasResult = new bool [ size ];
+
+    for( size_t i = 0; i < size; i++ ) {
+        vect.hasResult[i] = false;
+    }
+}

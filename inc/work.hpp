@@ -21,7 +21,36 @@
  * @param set_word refrence to set of words
  * @param callback pointer to callback function
  */
-void producer( mutex &mtx, association_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ));
+void producer( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ), bool reverseNotation );
+
+
+/**
+ * @brief Producer function of type 0 1 2 with regular notation
+ * 
+ * @param mtx refrence to mutex
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ * @param callback pointer to callback function
+ */
+inline void producer_a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
+    producer( mtx, solutions, set_hash, set_word, callback, false );
+}
+
+
+/**
+ * @brief Producer function of type 0 1 2 with reverse notation
+ * 
+ * @param mtx refrence to mutex
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ * @param callback pointer to callback function
+ */
+inline void producer_b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
+    producer( mtx, solutions, set_hash, set_word, callback, true );
+}
+
 
 /**
  * @brief Producer type 0 - all letters in lower case
@@ -31,7 +60,13 @@ void producer( mutex &mtx, association_vect &solutions, set_t &set_hash, set_t &
  * @param set_hash refrence to set of hashes
  * @param set_word refrence to set of words
  */
-inline void producer_0( mutex &mtx, association_vect &solutions, set_t &set_hash, set_t &set_word ) { producer( mtx, solutions, set_hash, set_word, toLowerCase ); }
+inline void producer_0a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_a( mtx, solutions, set_hash, set_word, toLowerCase );
+}
+
+inline void producer_0b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_b( mtx, solutions, set_hash, set_word, toLowerCase );
+}
 
 /**
  * @brief Producer type 1 - all letters in upper case
@@ -41,7 +76,13 @@ inline void producer_0( mutex &mtx, association_vect &solutions, set_t &set_hash
  * @param set_hash refrence to set of hashes
  * @param set_word refrence to set of words
  */
-inline void producer_1( mutex &mtx, association_vect &solutions, set_t &set_hash, set_t &set_word ) { producer( mtx, solutions, set_hash, set_word, toUpperCase ); }
+inline void producer_1a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_a( mtx, solutions, set_hash, set_word, toUpperCase );
+}
+
+inline void producer_1b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_b( mtx, solutions, set_hash, set_word, toUpperCase );
+}
 
 /**
  * @brief Producer type 2 - first letter in upper case, rest letters in lowwer case
@@ -51,7 +92,13 @@ inline void producer_1( mutex &mtx, association_vect &solutions, set_t &set_hash
  * @param set_hash refrence to set of hashes
  * @param set_word refrence to set of words
  */
-inline void producer_2( mutex &mtx, association_vect &solutions, set_t &set_hash, set_t &set_word ) { producer( mtx, solutions, set_hash, set_word, toStartCase ); }
+inline void producer_2a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_a( mtx, solutions, set_hash, set_word, toStartCase );
+}
+
+inline void producer_2b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_b( mtx, solutions, set_hash, set_word, toStartCase );
+}
 
 
 /*  declarations of utility functions
@@ -68,7 +115,7 @@ inline void producer_2( mutex &mtx, association_vect &solutions, set_t &set_hash
  * @param set_word thread refrence to set of words
  * @param callback thread pointer to callback function
  */
-void doWork( string &str_before, string &str_after, mutex &mtx, association_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) );
+void doWork( string &str_before, string &str_after, mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) );
 
 
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */
