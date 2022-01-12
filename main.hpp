@@ -12,6 +12,9 @@
 #include <thread>
 #include <mutex>
 
+//  signals
+#include <signal.h>
+
 //  hash utilities
 #include <openssl/md5.h>
 #include <crypt.h>

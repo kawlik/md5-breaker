@@ -25,7 +25,7 @@ void producer( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set
 
 
 /**
- * @brief General producer function of type 3 ( character increment )
+ * @brief General producer function of type 3 4 5( character increment )
  * 
  * @param mtx refrence to mutex
  * @param solutions refrence to solutions vector
@@ -34,6 +34,18 @@ void producer( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set
  * @param callback pointer to callback function
  */
 void producer_chararr( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ), bool reverseNotation );
+
+
+/**
+ * @brief General producer function of type 6 7 8 ( double word character increment )
+ * 
+ * @param mtx refrence to mutex
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ * @param callback pointer to callback function
+ */
+void producer_double( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ), bool reverseNotation );
 
 
 /*  utility aliases
@@ -56,6 +68,11 @@ inline void producer_chararr_a( mutex &mtx, solution_vect &solutions, set_t &set
     producer_chararr( mtx, solutions, set_hash, set_word, callback, false );
 }
 
+inline void producer_double_a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
+    producer_double( mtx, solutions, set_hash, set_word, callback, false );
+}
+
+
 /**
  * @brief Producer function of given type with reverse notation
  * 
@@ -72,6 +89,11 @@ inline void producer_b( mutex &mtx, solution_vect &solutions, set_t &set_hash, s
 inline void producer_chararr_b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
     producer_chararr( mtx, solutions, set_hash, set_word, callback, true );
 }
+
+inline void producer_double_b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
+    producer_double( mtx, solutions, set_hash, set_word, callback, true );
+}
+
 
 /**
  * @brief Producer type 0 - all letters in lower case
@@ -169,6 +191,56 @@ inline void producer_5b( mutex &mtx, solution_vect &solutions, set_t &set_hash, 
     producer_chararr_b( mtx, solutions, set_hash, set_word, toStartCase );
 }
 
+/**
+ * @brief Producer type 6 - all letters in lower case
+ * 
+ * @param mtx 
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ */
+inline void producer_6a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_double_a( mtx, solutions, set_hash, set_word, toLowerCase );
+}
+
+inline void producer_6b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_double_b( mtx, solutions, set_hash, set_word, toLowerCase );
+}
+
+/**
+ * @brief Producer type 7 - all letters in upper case
+ * 
+ * @param mtx 
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ */
+inline void producer_7a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_double_a( mtx, solutions, set_hash, set_word, toUpperCase );
+}
+
+inline void producer_7b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_double_b( mtx, solutions, set_hash, set_word, toUpperCase );
+}
+
+/**
+ * @brief Producer type 8 - first letter in upper case, rest letters in lowwer case
+ * 
+ * @param mtx 
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ */
+inline void producer_8a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_double_a( mtx, solutions, set_hash, set_word, toStartCase );
+}
+
+inline void producer_8b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_double_b( mtx, solutions, set_hash, set_word, toStartCase );
+}
+
+
+
 /*  declarations of utility functions
 /*   *   *   *   *   *   *   *   *   *   */
 
@@ -184,6 +256,20 @@ inline void producer_5b( mutex &mtx, solution_vect &solutions, set_t &set_hash, 
  * @param callback thread pointer to callback function
  */
 void doWork( string &str_before, string &str_after, mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) );
+
+
+/**
+ * @brief Procedures work inside a thread of double words
+ * 
+ * @param str_before string before tested word
+ * @param str_after string after tested word
+ * @param mtx thread refrence to mutex
+ * @param solutions thread refrence to solutions vector
+ * @param set_hash thread refrence to set of hashes
+ * @param set_word thread refrence to set of words
+ * @param callback thread pointer to callback function
+ */
+void doDoubleWork( string &str_before, string &str_after, mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) );
 
 
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */

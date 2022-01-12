@@ -6,7 +6,7 @@
 
 bool readFromFile( const string filename, set_t &set ) {
 
-    delete [] set.array;
+    // delete [] set.array;
 
     fstream file;
 
@@ -34,9 +34,13 @@ bool readFromFile( const string filename, set_t &set ) {
             set.array[i] = buffer_store[i];
         }
 
+        cout << "New hash set has been loaded! ( size: " << size << " ) " << endl;
+
         //  operaion was successful
         return true;
     }
+
+    cout << "Selected hash set has not been loaded!" << endl;
 
     //  operaion was unsuccessful
     return false;
@@ -44,9 +48,9 @@ bool readFromFile( const string filename, set_t &set ) {
 
 void initSolutionVect( solution_vect &vect, set_t &set_hash ) {
 
-    delete [] vect.hasResult;
-    delete [] vect.hash;
-    delete [] vect.word;
+    // delete [] vect.hasResult;
+    // delete [] vect.hash;
+    // delete [] vect.word;
 
     size_t size = set_hash.size;
 
