@@ -23,8 +23,8 @@ using namespace std;
 /*  macros
 /*   *   *   *   *   *   *   *   *   *   */
 
-#define MAX_NUM_CHECK   10000
-#define CHARARR_LEN     4
+#define MAX_NUM_CHECK   100
+#define CHARARR_LEN     3
 #define ASCI_MIN        0x21
 #define ASCI_MAX        0x7E
 
@@ -52,6 +52,20 @@ typedef struct {
     size_t size;
     size_t left;
 } solution_vect;
+
+
+/*  uitilities
+/*   *   *   *   *   *   *   *   *   *   */
+
+inline void printSolutionVect( solution_vect &solutions ) {
+
+    for( size_t i = 0; i < solutions.size; i++ ) {
+
+        if( !solutions.hasResult[i] ) continue;
+
+        cout << "> hash: [ " << solutions.hash[i] << " ] | > word: [ " << solutions.word[i] << " ]" << endl;
+    }
+}
 
 
 /*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   */

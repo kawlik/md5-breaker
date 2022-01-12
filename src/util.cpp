@@ -24,18 +24,22 @@ void toStartCase( string &str ) {
 
 bool nextPremutation( char *array, uint index ) {
 
-    if( index >= CHARARR_LEN ) return true;
+    if( index >= CHARARR_LEN ) return false;
 
     if( array[index] < ASCI_MIN )   {
         array[index] = ASCI_MIN;
-        return false;
+        return true;
     }
 
     if( array[index] < ASCI_MAX ) {
         array[index]++;
-        return false;
+        return true;
     }
 
-    array[index] = ASCI_MIN;
-    return nextPremutation( array, index + 1 );
+    if( array[index] >= ASCI_MAX ) {
+        array[index] = ASCI_MIN;
+        return nextPremutation( array, index + 1 );
+    }
+
+    return false;
 }

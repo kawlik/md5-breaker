@@ -30,25 +30,32 @@ int main( int argc, char **argv ) {
     initSolutionVect( solutions, set_hash );
 
 
-    thread t0 ( producer_0a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
-    thread t1 ( producer_0b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
-    thread t2 ( producer_1a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
-    thread t3 ( producer_1b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
-    thread t4 ( producer_2a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
-    thread t5 ( producer_2b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t0_a ( producer_0a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t0_b ( producer_0b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t1_a ( producer_1a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t1_b ( producer_1b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t2_a ( producer_2a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t2_b ( producer_2b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t3_a ( producer_3a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t3_b ( producer_3b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t4_a ( producer_4a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t4_b ( producer_4b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t5_a ( producer_5a, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
+    thread t5_b ( producer_5b, ref( mtx ), ref( solutions ), ref( set_hash ), ref( set_word ));
 
-    t5.join();
-    t4.join();
-    t3.join();
-    t2.join();
-    t1.join();
-    t0.join();
+    t0_a.join();
+    t0_b.join();
+    t1_a.join();
+    t1_b.join();
+    t2_a.join();
+    t2_b.join();
+    t3_a.join();
+    t3_b.join();
+    t4_a.join();
+    t4_b.join();
+    t5_a.join();
+    t5_b.join();
 
 
-    for( size_t i = 0; i < solutions.size; i++ ) {
-
-        if( !solutions.hasResult[i] ) continue;
-
-        cout << "> hash: [ " << solutions.hash[i] << " ] | > word: [ " << solutions.word[i] << " ]" << endl;
-    }
+    printSolutionVect( solutions );
 }

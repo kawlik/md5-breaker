@@ -1,6 +1,6 @@
-FLAGS = -c -nostdlib
-FINAL = -pedantic -Wall
-EXTRA =  -pthread -lcrypto -lssl
+FLAGS = -O2 -c -nostdlib
+FINAL = -O2 -pedantic -Wall
+EXTRA = -pthread -lcrypto -lssl
 
 RELOC = main.o fsop.o hash.o work.o util.o
 

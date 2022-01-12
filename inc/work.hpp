@@ -40,7 +40,7 @@ void producer_chararr( mutex &mtx, solution_vect &solutions, set_t &set_hash, se
 /*   *   *   *   *   *   *   *   *   *   */
 
 /**
- * @brief Producer function of type 0 1 2 with regular notation
+ * @brief Producer function of given type with regular notation
  * 
  * @param mtx refrence to mutex
  * @param solutions refrence to solutions vector
@@ -52,9 +52,12 @@ inline void producer_a( mutex &mtx, solution_vect &solutions, set_t &set_hash, s
     producer( mtx, solutions, set_hash, set_word, callback, false );
 }
 
+inline void producer_chararr_a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
+    producer_chararr( mtx, solutions, set_hash, set_word, callback, false );
+}
 
 /**
- * @brief Producer function of type 0 1 2 with reverse notation
+ * @brief Producer function of given type with reverse notation
  * 
  * @param mtx refrence to mutex
  * @param solutions refrence to solutions vector
@@ -66,6 +69,9 @@ inline void producer_b( mutex &mtx, solution_vect &solutions, set_t &set_hash, s
     producer( mtx, solutions, set_hash, set_word, callback, true );
 }
 
+inline void producer_chararr_b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word, void ( *callback )( string &str ) ) {
+    producer_chararr( mtx, solutions, set_hash, set_word, callback, true );
+}
 
 /**
  * @brief Producer type 0 - all letters in lower case
@@ -115,6 +121,53 @@ inline void producer_2b( mutex &mtx, solution_vect &solutions, set_t &set_hash, 
     producer_b( mtx, solutions, set_hash, set_word, toStartCase );
 }
 
+/**
+ * @brief Producer type 3 - all letters in lower case
+ * 
+ * @param mtx 
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ */
+inline void producer_3a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_chararr_a( mtx, solutions, set_hash, set_word, toLowerCase );
+}
+
+inline void producer_3b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_chararr_b( mtx, solutions, set_hash, set_word, toLowerCase );
+}
+
+/**
+ * @brief Producer type 4 - all letters in upper case
+ * 
+ * @param mtx 
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ */
+inline void producer_4a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_chararr_a( mtx, solutions, set_hash, set_word, toUpperCase );
+}
+
+inline void producer_4b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_chararr_b( mtx, solutions, set_hash, set_word, toUpperCase );
+}
+
+/**
+ * @brief Producer type 5 - first letter in upper case, rest letters in lowwer case
+ * 
+ * @param mtx 
+ * @param solutions refrence to solutions vector
+ * @param set_hash refrence to set of hashes
+ * @param set_word refrence to set of words
+ */
+inline void producer_5a( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_chararr_a( mtx, solutions, set_hash, set_word, toStartCase );
+}
+
+inline void producer_5b( mutex &mtx, solution_vect &solutions, set_t &set_hash, set_t &set_word ) {
+    producer_chararr_b( mtx, solutions, set_hash, set_word, toStartCase );
+}
 
 /*  declarations of utility functions
 /*   *   *   *   *   *   *   *   *   *   */
